@@ -56,12 +56,12 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" +
-                "artist='" + artist + '\'' +
-                ", year='" + year + '\'' +
-                ", album='" + album + '\'' +
-                ", title='" + title + '\'' +
-                ", size=" + size +
+        return "Song {" +
+                "artist = '" + artist + '\'' +
+                ", year = '" + year + '\'' +
+                ", album = '" + album + '\'' +
+                ", title = '" + title + '\'' +
+                ", size = " + size + " sec" +
                 '}';
     }
 }

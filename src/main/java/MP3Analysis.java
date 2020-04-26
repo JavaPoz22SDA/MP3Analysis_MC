@@ -16,25 +16,21 @@ public class MP3Analysis {
         try (DirectoryStream<Path> files = Files.newDirectoryStream(path, "*.mp3")) {
             for (Path entry: files) {
                 Mp3File mp3file = new Mp3File(entry);
-                ID3v1 id3v1Tag = mp3file.getId3v1Tag();
-                Song song = new Song (id3v1Tag.getArtist(),id3v1Tag.getYear(),id3v1Tag.getAlbum(),id3v1Tag.getTitle(),mp3file.getLengthInSeconds());
-//                System.out.println("Artist: " + id3v1Tag.getArtist());
-//                System.out.println("Title: " + id3v1Tag.getTitle());
-//                System.out.println("Album: " + id3v1Tag.getAlbum());
-//                System.out.println("Year: " + id3v1Tag.getYear());
-//                System.out.println("Length of this mp3 is: " + mp3file.getLengthInSeconds() + " seconds");
-                listOfSongs.add(song);
+                ID3v1 id3Tag = null;
+                if (mp3file.hasId3v1Tag()){
+                    id3Tag = mp3file.getId3v1Tag();
+                } else if (mp3file.hasId3v2Tag()){
+                    id3Tag = mp3file.getId3v2Tag();
+                }
+                if (id3Tag != null){
+                    Song song = new Song (id3Tag.getArtist(),id3Tag.getYear(),id3Tag.getAlbum(),id3Tag.getTitle(),mp3file.getLengthInSeconds());
+                    listOfSongs.add(song);
+                }
             }
-        } catch (IOException x) {
-            System.err.println(x);
-        } catch (InvalidDataException e) {
-            e.printStackTrace();
-        } catch (UnsupportedTagException e) {
-            e.printStackTrace();
+        } catch (IOException | InvalidDataException | UnsupportedTagException x) {
+            x.printStackTrace();
         }
 
         return listOfSongs;
     }
-
-
 }

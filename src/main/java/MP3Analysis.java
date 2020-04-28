@@ -3,6 +3,7 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -31,6 +32,15 @@ public class MP3Analysis {
             x.printStackTrace();
         }
 
+        try {
+            FileWriter fileWriter = new FileWriter(filePath + "\\description.txt");
+            for (Song song : listOfSongs){
+                fileWriter.write(song.toString() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return listOfSongs;
     }
 }

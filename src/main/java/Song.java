@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.rmi.MarshalException;
+
 public class Song {
 
     private String artist;
@@ -56,12 +59,18 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song {" +
-                "artist = '" + artist + '\'' +
-                ", year = '" + year + '\'' +
-                ", album = '" + album + '\'' +
-                ", title = '" + title + '\'' +
-                ", size = " + size + " sec" +
-                '}';
+        return "Autor: " + artist + "\n"+
+                "Rok produkcji: " + year + "\n"+
+                "Album: " + album + "\n" +
+                "Tytuł: " + title + "\n" +
+                "Rozmiar w MB: " + round(size/(1024.0*1024)) +"\n\n";
+    }
+
+    public double round (double number){
+        number = number *100;
+        number = Math.round(number);
+        number = number/100;
+
+        return number;
     }
 }

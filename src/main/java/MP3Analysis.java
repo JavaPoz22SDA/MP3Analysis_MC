@@ -24,7 +24,7 @@ public class MP3Analysis {
                     id3Tag = mp3file.getId3v2Tag();
                 }
                 if (id3Tag != null){
-                    Song song = new Song (id3Tag.getArtist(),id3Tag.getYear(),id3Tag.getAlbum(),id3Tag.getTitle(),mp3file.getLengthInSeconds());
+                    Song song = new Song (id3Tag.getArtist(),id3Tag.getYear(),id3Tag.getAlbum(),id3Tag.getTitle(),Files.size(entry));
                     listOfSongs.add(song);
                 }
             }
